@@ -14,7 +14,7 @@
 
 ## Add Keys
   
-  Add /keys/keys.js and src/keys/index.js files to the project with these keys <br />
+  Add `/keys/keys.js` and `src/keys/index.js` files to the project with these keys <br />
   
  `INSTANCE_LOCATOR: <YOUR CHAT KIT INSTANCE>`<br /> 
  `KEY: <YOUR CHAT KIT KEY>`<br /> 
