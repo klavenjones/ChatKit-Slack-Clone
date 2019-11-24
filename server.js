@@ -9,19 +9,15 @@ const keys = require("./keys/keys");
 const app = express();
 
 const chatkit = new Chatkit.default({
-  instanceLocator: keys.INSTANCE_LOCATOR,
-  key: keys.KEY
+  instanceLocator: process.env.INSTANCE_LOCATOR || keys.INSTANCE_LOCATOR,
+  key: process.env.KEY || keys.KEY
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "./build")));
-
-app.get("/", (req, res) => {
-  res.send("HELLO");
-});
+app.use(express.static(path.join(__dirname, "build")));
 
 app.post("/user", (req, res) => {
   const { username } = req.body;
@@ -49,6 +45,11 @@ app.post("/authenticate", (req, res) => {
   });
 
   res.status(authData.status).send(authData.body);
+});
+
+// Handles any requests that don't match the ones above
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
 const PORT = process.env.PORT || 3001;

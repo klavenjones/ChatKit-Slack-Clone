@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { ChatManager, TokenProvider } from "@pusher/chatkit-client";
 
 import { INSTANCE_LOCATOR, ROOM_ID } from "../keys";
@@ -22,7 +22,7 @@ export default class ChatScreen extends Component {
 
   componentDidMount() {
     const chatManager = new ChatManager({
-      instanceLocator: INSTANCE_LOCATOR,
+      instanceLocator: process.env.INSTANCE_LOCATOR || INSTANCE_LOCATOR,
       userId: this.props.currentUsername,
       tokenProvider: new TokenProvider({
         url: "http://localhost:3001/authenticate"
@@ -36,7 +36,7 @@ export default class ChatScreen extends Component {
         this.setState({ currentUser });
         return currentUser
           .subscribeToRoom({
-            roomId: ROOM_ID,
+            roomId: process.env.ROOM_ID || ROOM_ID,
             messageLimits: 100,
             hooks: {
               onMessage: message => {
@@ -105,6 +105,10 @@ export default class ChatScreen extends Component {
         width: "85%",
         display: "flex",
         flexDirection: "column"
+      },
+      h1: {
+        fontSize: 36,
+        marginBottom: 30
       }
     };
 
@@ -112,14 +116,14 @@ export default class ChatScreen extends Component {
       <div style={styles.container}>
         <div style={styles.chatContainer}>
           <aside style={styles.whosOnlineListContainer}>
-            <h1>Who's Online</h1>
+            <h1 style={styles.h1}>Who's Online</h1>
             <WhoseOnlineList
               currentUser={this.state.currentUser}
               users={this.state.currentRoom.users}
             />
           </aside>
           <section style={styles.chatListContainer}>
-            <h1>Welcome, {this.props.currentUsername}</h1>
+            <h1 style={styles.h1}>Welcome, {this.props.currentUsername}</h1>
             <MessageList
               messages={this.state.messages}
               style={styles.chatList}

@@ -22,7 +22,7 @@ class App extends Component {
       body: JSON.stringify({ username })
     })
       .then(response => {
-        console.log("success ", response);
+        
         this.setState({
           currentUsername: username,
           currentScreen: "ChatScreen"

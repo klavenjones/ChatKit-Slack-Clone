@@ -1,5 +1,7 @@
 # dependencies
 node_modules/
+yarn.lock
+build/
 
 # errors
 npm-debug.log*
@@ -8,3 +10,4 @@ yarn-error.log*
 
 #PRIVATE
 keys/
+.DS_Store

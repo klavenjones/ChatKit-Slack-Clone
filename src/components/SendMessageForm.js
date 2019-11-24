@@ -36,7 +36,19 @@ export default class SendMessageForm extends Component {
         outline: "none",
         border: "none",
         flex: 1,
-        fontSize: 16
+        fontSize: 24
+      },
+      button: {
+        height: 35,
+        cursor: "pointer",
+        backgroundColor: "#DA3F62",
+        color: "white",
+        width: "15%",
+        margin: "auto",
+        marginBottom: 20,
+        borderStyle: "none",
+        borderRadius: "3px",
+        fontSize: 20
       }
     };
     return (
@@ -49,7 +61,9 @@ export default class SendMessageForm extends Component {
               onChange={this.onChange}
               style={styles.input}
             />
-            <input type="submit" />
+            <button type="submit" style={styles.button}>
+              Send Message
+            </button>
           </form>
         </div>
       </div>
